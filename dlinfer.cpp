@@ -82,3 +82,86 @@ InferenceEngineConfigurator::InferenceEngineConfigurator(const std::string &mode
     // Try to read labels file
     readLabels(labelFileName);
 }
+
+/*
+ * Method reads labels file
+ * @param fileName - the file path
+ * @return true if all success else false
+ */
+bool InferenceEngineConfigurator::readLabels(const std::string &fileName) {
+    _classes.clear();
+
+    std::ifstream inputFile;
+    inputFile.open(fileName, std::ios::in);
+    if (!inputFile.is_open())
+        return false;
+
+    std::string strLine;
+    while (std::getline(inputFile, strLine)) {
+        trim(strLine);
+        _classes.push_back(strLine);
+    }
+
+    return true;
+}
+
+void InferenceEngineConfigurator::loadImages(const std::string &image) {
+    std::vector<std::string> imageVector;
+    imageVector.push_back(image);
+    loadImages(imageVector);
+}
+
+void InferenceEngineConfigurator::loadImages(const std::vector<std::string> &images) {
+    InferenceEngine::SizeVector inputDims;
+    network.getInputDimentions(inputDims);
+    size_t batchSize = inputDims.at(inputDims.size() - 1);
+    inputDims.at(inputDims.size() - 1) = 1;
+
+    int inputNetworkSize = std::accumulate(inputDims.begin(), inputDims.end(), 1, std::multiplies<size_t>());
+
+    if (!inputDims.size()) {
+        THROW_IE_EXCEPTION << "Error: Incorrect network input dimensions!";
+    }
+
+    std::vector<std::shared_ptr<unsigned char>> readImages;
+
+    for (auto i = 0; i < images.size(); i++) {
+        FormatReader::ReaderPtr reader(images.at(i).c_str());
+        if (reader.get() == nullptr) {
+            std::cerr << "[WARNING]: Image " << images.at(i) << " cannot be read!" << std::endl;
+            continue;
+        }
+        if (reader->size() != inputNetworkSize) {
+            std::cerr << "[WARNING]: Input sizes mismatch, got " << reader->size() << " bytes, expecting "
+                      << inputNetworkSize << std::endl;
+            continue;
+        }
+        readImages.push_back(reader->getData());
+        imageNames.push_back(images.at(i));
+    }
+
+    if (readImages.size() == 0) {
+        THROW_IE_EXCEPTION << "Valid input images were not found!";
+    }
+
+    if (batchSize == 1) {
+        network.getNetwork().setBatchSize(readImages.size());
+    } else {
+        if (batchSize > readImages.size()) {
+            auto readImagesSize = readImages.size();
+            size_t diff = batchSize / readImagesSize;
+
+            for (auto i = 1; i < diff; i++) {
+                for (auto j = 0; j < readImagesSize; j++) {
+                    imageNames.push_back(imageNames.at(j));
+                    readImages.push_back(readImages.at(j));
+                }
+            }
+            if (readImagesSize * diff != batchSize) {
+                for (auto j = 0; j < batchSize - readImagesSize * diff; j++) {
+                    imageNames.push_back(imageNames.at(j));
+                    readImages.push_back(readImages.at(j));
+                }
+            }
+        } else if (batchSize < readImages.size()) {
+            while (readImages.size() != batchSize) {
