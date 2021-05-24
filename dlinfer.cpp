@@ -165,3 +165,96 @@ void InferenceEngineConfigurator::loadImages(const std::vector<std::string> &ima
             }
         } else if (batchSize < readImages.size()) {
             while (readImages.size() != batchSize) {
+                auto name = imageNames.at(imageNames.size() - 1);
+                std::cerr << "[WARNING]: Image " << name << " skipped!" << std::endl;
+                imageNames.pop_back();
+                readImages.pop_back();
+            }
+        }
+    }
+
+    inputDims = network.getNetwork().getInput()->dims;
+    InferenceEngine::SizeVector outputDims = network.getNetwork().getOutput()->dims;
+
+    switch (network.getNetwork().getPrecision()) {
+        case Precision::FP32 :
+            _input = InferenceEngine::make_shared_blob<float, const InferenceEngine::SizeVector>(inputDims);
+            break;
+        case Precision::Q78 :
+        case Precision::I16 :
+            _input = InferenceEngine::make_shared_blob<short, const InferenceEngine::SizeVector>(inputDims);
+            break;
+        case Precision::U8 :
+            _input = InferenceEngine::make_shared_blob<uint8_t, const InferenceEngine::SizeVector>(inputDims);
+            break;
+        default:
+            THROW_IE_EXCEPTION << "Unsupported network precision: " << network.getNetwork().getPrecision();
+    }
+    _input->allocate();
+
+    _output = InferenceEngine::make_shared_blob<float, const InferenceEngine::SizeVector>(outputDims);
+    _output->allocate();
+
+    std::shared_ptr<unsigned char> imagesData;
+    size_t imagesSize = readImages.size() * inputNetworkSize;
+    imagesData.reset(new unsigned char[imagesSize], std::default_delete<unsigned char[]>());
+
+    for (auto i = 0, k = 0; i < readImages.size(); i++) {
+        for (auto j = 0; j < inputNetworkSize; j++, k++) {
+            imagesData.get()[k] = readImages.at(i).get()[j];
+        }
+    }
+
+    readImages.clear();
+
+    InferenceEngine::ConvertImageToInput(imagesData.get(), imagesSize, *_input);
+
+    imageLoaded = true;
+}
+
+void InferenceEngineConfigurator::infer() {
+    if (!imageLoaded) {
+        THROW_IE_EXCEPTION << "Scoring failed! Input data is not loaded!";
+    }
+    InferenceEngine::ResponseDesc dsc;
+    InferenceEngine::StatusCode sts = _plugin->Infer(*_input, *_output, &dsc);
+
+    // Check errors
+    if (sts == InferenceEngine::GENERAL_ERROR) {
+        THROW_IE_EXCEPTION << "Scoring failed! Critical error: " << dsc.msg;
+    } else if (sts == InferenceEngine::NOT_IMPLEMENTED) {
+        THROW_IE_EXCEPTION << "Scoring failed! Input data is incorrect and not supported!";
+    } else if (sts == InferenceEngine::NETWORK_NOT_LOADED) {
+        THROW_IE_EXCEPTION << "Scoring failed! " << dsc.msg;
+    }
+    wasInfered = true;
+}
+
+std::vector<InferenceResults> InferenceEngineConfigurator::getTopResult(unsigned int topCount) {
+    if (!wasInfered) {
+        THROW_IE_EXCEPTION << "Cannot get top results!";
+    }
+    std::vector<unsigned> results;
+    // Get top N results
+    InferenceEngine::TopResults(topCount, *_output, results);
+
+    // Save top N results to vector with InferenceEngineConfigurator::InferenceResults objects
+    std::vector<InferenceResults> outputResults;
+    size_t batchSize = _output->dims()[1];
+
+    topCount = std::min<unsigned int>(_output->dims()[0], topCount);
+
+    if (batchSize != imageNames.size()) {
+        THROW_IE_EXCEPTION << "Batch size is not equal to the number of images!";
+    }
+    for (size_t i = 0; i < batchSize; i++) {
+        InferenceResults imageResult(imageNames.at(i));
+        for (size_t j = 0; j < topCount; j++) {
+            unsigned result = results[i * topCount + j];
+            std::string label =
+                    result < _classes.size() ? _classes[result] : stringFormat("label #%d", result);
+            imageResult.addResult(
+                    {static_cast<int>(result), _output->data()[result + i * (_output->size() / batchSize)], label});
+        }
+        outputResults.push_back(imageResult);
+    }
