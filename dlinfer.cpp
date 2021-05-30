@@ -258,3 +258,91 @@ std::vector<InferenceResults> InferenceEngineConfigurator::getTopResult(unsigned
         }
         outputResults.push_back(imageResult);
     }
+
+    if (outputResults.size()) {
+        std::cout << std::endl << "Top " << topCount << " results:" << std::endl << std::endl;
+        for (size_t i = 0; i < outputResults.size(); i++) {
+            std::cout << "Image " << outputResults.at(i).getName() << std::endl << std::endl;
+            const std::vector<LabelProbability> imageResults = outputResults.at(i).getResults();
+            for (size_t j = 0; j < imageResults.size(); j++) {
+                std::cout << imageResults.at(j).getLabelIndex() << " " << imageResults.at(j).getProbability() << " "
+                          << imageResults.at(j).getLabel() << std::endl;
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    return outputResults;
+}
+
+void InferenceEngineConfigurator::printGetPerformanceCounts(std::ostream &stream) {
+    long long totalTime = 0;
+    std::map<std::string, InferenceEngine::InferenceEngineProileInfo> perfomanceMap;
+    // Get perfomance counts
+    _plugin->GetPerformanceCounts(perfomanceMap, nullptr);
+    // Print perfomance counts
+    stream << std::endl << "Perfomance counts:" << std::endl << std::endl;
+    for (std::map<std::string, InferenceEngine::InferenceEngineProileInfo>::const_iterator it = perfomanceMap.begin();
+         it != perfomanceMap.end(); ++it) {
+        stream << std::setw(30) << std::left << it->first + ":";
+        switch (it->second.status) {
+            case InferenceEngine::InferenceEngineProileInfo::EXECUTED:
+                stream << std::setw(15) << std::left << "EXECUTED";
+                break;
+            case InferenceEngine::InferenceEngineProileInfo::NOT_RUN:
+                stream << std::setw(15) << std::left << "NOT_RUN";
+                break;
+            case InferenceEngine::InferenceEngineProileInfo::OPTIMIZED_OUT:
+                stream << std::setw(15) << std::left << "OPTIMIZED_OUT";
+                break;
+        }
+        stream << std::setw(20) << std::left << "realTime: " + std::to_string(it->second.realTime_uSec);
+        stream << " cpu: " << it->second.cpu_uSec << std::endl;
+        if (it->second.realTime_uSec > 0) {
+            totalTime += it->second.realTime_uSec;
+        }
+    }
+    stream << std::setw(20) << std::left << "Total time: " + std::to_string(totalTime) << " microseconds" << std::endl;
+}
+
+/*
+ * Set the path to plugin
+ * @param input - plugin name
+ * @return Plugin path
+ */
+std::string InferenceEngineConfigurator::make_plugin_name(const std::string &path, const std::string &input) {
+    std::string separator = "/";
+    if (path.empty())
+        separator = "";
+    return path + separator + "lib" + input + ".so";
+}
+
+
+void InferenceEngineConfigurator::setISLVC2012MeanScalars() {
+    // TODO: Put mean image from user
+    network.getNetwork().setMeanScalars({104.00698793f, 116.66876762f, 122.67891434f});
+}
+
+void InferenceEngineConfigurator::loadModel() {
+    wasInfered = false;
+    InferenceEngine::ResponseDesc dsc;
+    // TODO: this need to be handled in smart wrapper over inference engine plugin
+    InferenceEngine::StatusCode sts = _plugin->LoadNetwork(network.getNetwork(), &dsc);
+    if (sts == InferenceEngine::GENERAL_ERROR) {
+        THROW_IE_EXCEPTION << dsc.msg;
+    } else if (sts == InferenceEngine::NOT_IMPLEMENTED) {
+        THROW_IE_EXCEPTION << "Model cannot be loaded! Plugin is not supported this model!";
+    }
+}
+
+static std::ostream & operator << (std::ostream & os, const Version *version) {
+    os << "\tPlugin version ......... ";
+    if (nullptr == version) {
+        os << "UNKNOWN";
+    } else {
+        os << version->apiVersion.major << "." << version->apiVersion.minor;
+    }
+
+    os << "\n\tPlugin name ............ ";
+    if (nullptr == version || version->description == nullptr) {
+        std :: cout << "UNKNOWN";
