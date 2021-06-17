@@ -346,3 +346,35 @@ static std::ostream & operator << (std::ostream & os, const Version *version) {
     os << "\n\tPlugin name ............ ";
     if (nullptr == version || version->description == nullptr) {
         std :: cout << "UNKNOWN";
+    } else {
+        os << version->description;
+    }
+
+    os << "\n\tPlugin build ........... ";
+    if (nullptr == version || version->buildNumber == nullptr) {
+        std :: cout << "UNKNOWN";
+    } else {
+        os << version->buildNumber;
+    }
+
+    return os;
+}
+
+InferenceEnginePluginPtr InferenceEngineConfigurator::selectPlugin(const std::vector<std::string> &pluginDirs,
+                                                                   const std::string &name) {
+    std::stringstream errs;
+    for (auto &pluginPath : pluginDirs) {
+        try {
+            InferenceEnginePluginPtr plugin(make_plugin_name(pluginPath, name));
+            const Version *version;
+            plugin->GetVersion(version);
+            std::cout << version << std::endl;
+            return plugin;
+        }
+        catch (const std::exception &ex) {
+            errs << "cannot load plugin: " << name << " from " << pluginPath << ": " << ex.what() << ", skipping\n";
+        }
+    }
+    std::cerr << errs.str();
+    THROW_IE_EXCEPTION << "cannot load plugin: " << name;
+}
