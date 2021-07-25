@@ -15,4 +15,5 @@
 */
 
 /**
- * \brief Declaration of metho
+ * \brief Declaration of methods and classes for working with Inference Engine API
+ * \file InferenceEngineConfigur
