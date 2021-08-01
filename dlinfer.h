@@ -16,4 +16,5 @@
 
 /**
  * \brief Declaration of methods and classes for working with Inference Engine API
- * \file InferenceEngineConfigur
+ * \file InferenceEngineConfigurator.h
+ * \example inference_engine_classification_sample/core/InferenceEngineConfi
