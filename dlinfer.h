@@ -24,3 +24,6 @@
 #include <string>
 #include <vector>
 #include <ie_so_loader.h>
+#include <ie_cnn_net_reader.h>
+#include <inference_engine.hpp>
+#include <ie_plugin_ptr.
