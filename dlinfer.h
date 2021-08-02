@@ -17,4 +17,10 @@
 /**
  * \brief Declaration of methods and classes for working with Inference Engine API
  * \file InferenceEngineConfigurator.h
- * \example inference_engine_classification_sample/core/InferenceEngineConfi
+ * \example inference_engine_classification_sample/core/InferenceEngineConfigurator.h
+ */
+#pragma once
+
+#include <string>
+#include <vector>
+#include <ie_so_loader.h>
