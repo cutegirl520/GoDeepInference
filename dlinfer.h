@@ -26,4 +26,10 @@
 #include <ie_so_loader.h>
 #include <ie_cnn_net_reader.h>
 #include <inference_engine.hpp>
-#include <ie_plugin_ptr.
+#include <ie_plugin_ptr.hpp>
+
+class LabelProbability {
+private:
+	/// Index of current label
+	int labelIdx = 0;
+	/
