@@ -33,4 +33,9 @@ private:
 	/// Index of current label
 	int labelIdx = 0;
 	/// Name of class from file with labels
-	std::string classNam
+	std::string className;
+	/// The probability of prediction
+	float probability = 0.0f;
+
+public:
+	/**
