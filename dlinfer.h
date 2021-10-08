@@ -39,3 +39,5 @@ private:
 
 public:
 	/**
+	 * Constructor of InferenceResults class
+	 * @param labelIdx - index of curre
