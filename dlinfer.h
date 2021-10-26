@@ -40,4 +40,6 @@ private:
 public:
 	/**
 	 * Constructor of InferenceResults class
-	 * @param labelIdx - index of curre
+	 * @param labelIdx - index of current label
+	 * @param probability - the probability of prediction
+	 * @param className - name of c
