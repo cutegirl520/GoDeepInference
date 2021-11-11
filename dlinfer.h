@@ -45,4 +45,4 @@ public:
 	 * @param className - name of class from file with labels
 	 * @return InferenceResults object
 	 */
-	LabelP
+	LabelProbability(int labelIdx, float probability, std::string className) : labelIdx(labelIdx)
