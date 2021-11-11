@@ -42,4 +42,7 @@ public:
 	 * Constructor of InferenceResults class
 	 * @param labelIdx - index of current label
 	 * @param probability - the probability of prediction
-	 * @param className - name of c
+	 * @param className - name of class from file with labels
+	 * @return InferenceResults object
+	 */
+	LabelP
