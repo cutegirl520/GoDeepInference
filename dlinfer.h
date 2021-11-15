@@ -46,4 +46,5 @@ public:
 	 * @return InferenceResults object
 	 */
 	LabelProbability(int labelIdx, float probability, std::string className) : labelIdx(labelIdx),
-		                                                                   className
+		                                                                   className(className),
+		                                                             
