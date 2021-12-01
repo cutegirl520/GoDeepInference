@@ -47,4 +47,9 @@ public:
 	 */
 	LabelProbability(int labelIdx, float probability, std::string className) : labelIdx(labelIdx),
 		                                                                   className(className),
-		                                                             
+		                                                                   probability(probability) {}
+
+	/**
+	 * Get label index
+	 * @return index of current label
+	
