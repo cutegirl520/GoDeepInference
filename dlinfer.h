@@ -52,4 +52,11 @@ public:
 	/**
 	 * Get label index
 	 * @return index of current label
-	
+	 */
+	const int &getLabelIndex() const {
+	    return labelIdx;
+	}
+
+	/**
+	 * Get label name
+	 *
