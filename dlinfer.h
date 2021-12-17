@@ -59,4 +59,8 @@ public:
 
 	/**
 	 * Get label name
-	 *
+	 * @return label
+	 */
+	const std::string &getLabel() const {
+	    return className;
+	
