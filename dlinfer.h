@@ -63,4 +63,10 @@ public:
 	 */
 	const std::string &getLabel() const {
 	    return className;
-	
+	}
+
+	/**
+	 * Get probability
+	 * @return probability
+	 */
+	const flo
