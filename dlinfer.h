@@ -69,4 +69,11 @@ public:
 	 * Get probability
 	 * @return probability
 	 */
-	const flo
+	const float &getProbability() const {
+	    return probability;
+	}
+};
+
+/**
+* \class InferenceResults
+* \brief Rep
