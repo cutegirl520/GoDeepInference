@@ -76,4 +76,8 @@ public:
 
 /**
 * \class InferenceResults
-* \brief Rep
+* \brief Represents predicted data in easy to use format
+*/
+class InferenceResults {
+private:
+	std::string
