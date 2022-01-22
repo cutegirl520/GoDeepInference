@@ -84,4 +84,8 @@ private:
 	std::vector<LabelProbability> results;
 
 public:
-	explicit I
+	explicit InferenceResults(std::string &name) {
+	    image = name;
+	}
+
+	void addResult(LabelProbab
