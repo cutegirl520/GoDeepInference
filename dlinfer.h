@@ -80,4 +80,8 @@ public:
 */
 class InferenceResults {
 private:
-	std::string
+	std::string image;
+	std::vector<LabelProbability> results;
+
+public:
+	explicit I
