@@ -93,4 +93,8 @@ public:
 	}
 
 	const std::string &getName() const {
-	    return i
+	    return image;
+	}
+
+	const std::vector<LabelProbability> &getResults() const {
+	    return results;
