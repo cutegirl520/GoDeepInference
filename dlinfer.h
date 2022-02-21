@@ -88,4 +88,9 @@ public:
 	    image = name;
 	}
 
-	void addResult(LabelProbab
+	void addResult(LabelProbability result) {
+	    results.push_back(result);
+	}
+
+	const std::string &getName() const {
+	    return i
