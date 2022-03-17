@@ -108,4 +108,5 @@ public:
 class InferenceEngineConfigurator {
 public:
     /**
-     * Co
+     * Constructor of InferenceEngineConfigurator class
+     * @param modelFile - the path 
