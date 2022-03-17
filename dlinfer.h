@@ -103,4 +103,9 @@ public:
 
 /**
  * \class InferenceEngineConfigurator
- * \brief This class com
+ * \brief This class communicates with Inference Engine
+ */
+class InferenceEngineConfigurator {
+public:
+    /**
+     * Co
