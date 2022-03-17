@@ -98,3 +98,9 @@ public:
 
 	const std::vector<LabelProbability> &getResults() const {
 	    return results;
+	}
+};
+
+/**
+ * \class InferenceEngineConfigurator
+ * \brief This class com
