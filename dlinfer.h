@@ -109,4 +109,6 @@ class InferenceEngineConfigurator {
 public:
     /**
      * Constructor of InferenceEngineConfigurator class
-     * @param modelFile - the path 
+     * @param modelFile - the path to model in .xml format
+     * @param pluginPath - the path to plugin
+     
