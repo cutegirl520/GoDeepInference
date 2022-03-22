@@ -112,4 +112,5 @@ public:
      * @param modelFile - the path to model in .xml format
      * @param pluginPath - the path to plugin
      * @param pluginName - the name of plugin for prediction
-     * @param la
+     * @param labelFile - the path to custom file with labels (Default is empty)
+     * @retu
