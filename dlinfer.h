@@ -111,4 +111,5 @@ public:
      * Constructor of InferenceEngineConfigurator class
      * @param modelFile - the path to model in .xml format
      * @param pluginPath - the path to plugin
-     
+     * @param pluginName - the name of plugin for prediction
+     * @param la
