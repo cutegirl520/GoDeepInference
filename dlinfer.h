@@ -116,3 +116,5 @@ public:
      * @return InferenceEngineConfigurator object
      */
     InferenceEngineConfigurator(const std::string &modelFile, const std::vector<std::string> &pluginPath,
+                                const std::string &pluginName, const std::string &labelFile = "");
+
