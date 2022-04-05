@@ -118,3 +118,6 @@ public:
     InferenceEngineConfigurator(const std::string &modelFile, const std::vector<std::string> &pluginPath,
                                 const std::string &pluginName, const std::string &labelFile = "");
 
+    /**
+     * This method loads image for prediction to blob
+     * @param
