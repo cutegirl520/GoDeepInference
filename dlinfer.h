@@ -115,4 +115,4 @@ public:
      * @param labelFile - the path to custom file with labels (Default is empty)
      * @return InferenceEngineConfigurator object
      */
-    InferenceEngineConfigurator(cons
+    InferenceEngineConfigurator(const std::string &modelFile, const std::vector<std::string> &pluginPath,
