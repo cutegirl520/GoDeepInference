@@ -113,4 +113,6 @@ public:
      * @param pluginPath - the path to plugin
      * @param pluginName - the name of plugin for prediction
      * @param labelFile - the path to custom file with labels (Default is empty)
-     * @retu
+     * @return InferenceEngineConfigurator object
+     */
+    InferenceEngineConfigurator(cons
