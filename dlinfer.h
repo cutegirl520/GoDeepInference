@@ -120,4 +120,6 @@ public:
 
     /**
      * This method loads image for prediction to blob
-     * @param
+     * @param images - the image path for prediction
+     */
+    void loadImages(const
