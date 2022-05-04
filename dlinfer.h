@@ -127,4 +127,8 @@ public:
     /**
      * This method loads image for prediction to blob
      * @param images - the image path for prediction
-    
+     */
+    void loadImages(const std::string &image);
+
+    /**
+     * Method needs to call 
