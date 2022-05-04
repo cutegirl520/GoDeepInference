@@ -125,4 +125,6 @@ public:
     void loadImages(const std::vector<std::string> &images);
 
     /**
-     * This method loads i
+     * This method loads image for prediction to blob
+     * @param images - the image path for prediction
+    
