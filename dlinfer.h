@@ -135,4 +135,8 @@ public:
      */
     void infer();
 
-    std::vector<InferenceResults> getTopResul
+    std::vector<InferenceResults> getTopResult(unsigned int topCount);
+    
+    /**
+     * Function prints perfomance counts
+     * 
