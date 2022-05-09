@@ -131,4 +131,8 @@ public:
     void loadImages(const std::string &image);
 
     /**
-     * Method needs to call 
+     * Method needs to call prediction
+     */
+    void infer();
+
+    std::vector<InferenceResults> getTopResul
