@@ -139,4 +139,6 @@ public:
     
     /**
      * Function prints perfomance counts
-     * 
+     * @param stream - output stream
+     */
+    void printGetPerformanceCounts(std::ostre
