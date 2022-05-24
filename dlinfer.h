@@ -141,4 +141,9 @@ public:
      * Function prints perfomance counts
      * @param stream - output stream
      */
-    void printGetPerformanceCounts(std::ostre
+    void printGetPerformanceCounts(std::ostream &stream);
+
+    /**
+     * Externally specify meanimage values
+     */
+ 
