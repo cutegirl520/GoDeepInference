@@ -146,4 +146,7 @@ public:
     /**
      * Externally specify meanimage values
      */
- 
+    void setISLVC2012MeanScalars();
+
+    /**
+     * Method to be called prior t
