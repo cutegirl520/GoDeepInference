@@ -156,4 +156,6 @@ public:
 private:
     InferenceEngine::CNNNetReader network;
     InferenceEngine::Blob::Ptr _input;
-    InferenceEngine::TBlob<float>::Ptr _output
+    InferenceEngine::TBlob<float>::Ptr _output;
+    InferenceEngine::InferenceEnginePluginPtr _plugin;
+    std::vector
