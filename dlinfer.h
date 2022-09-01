@@ -158,4 +158,8 @@ private:
     InferenceEngine::Blob::Ptr _input;
     InferenceEngine::TBlob<float>::Ptr _output;
     InferenceEngine::InferenceEnginePluginPtr _plugin;
-    std::vector
+    std::vector<std::string> _classes;
+    bool imageLoaded = false;
+    bool wasInfered = false;
+
+ 
