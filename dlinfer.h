@@ -162,4 +162,6 @@ private:
     bool imageLoaded = false;
     bool wasInfered = false;
 
- 
+    std::vector<std::string> imageNames;
+
+    static std::string make_plugin_nam
