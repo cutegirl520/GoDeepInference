@@ -164,4 +164,6 @@ private:
 
     std::vector<std::string> imageNames;
 
-    static std::string make_plugin_nam
+    static std::string make_plugin_name(const std::string &path, const std::string &input);
+
+    bool readL
