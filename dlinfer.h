@@ -166,4 +166,6 @@ private:
 
     static std::string make_plugin_name(const std::string &path, const std::string &input);
 
-    bool readL
+    bool readLabels(const std::string &fileName);
+
+    InferenceEngine::InferenceEnginePluginPtr  selectPl
