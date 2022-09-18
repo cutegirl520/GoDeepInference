@@ -169,4 +169,6 @@ private:
     bool readLabels(const std::string &fileName);
 
     InferenceEngine::InferenceEnginePluginPtr  selectPlugin(const std::vector<std::string> &vector,
-                                        
+                                                            const std::string &basic_string);
+};
+
