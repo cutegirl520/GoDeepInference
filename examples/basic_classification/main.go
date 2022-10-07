@@ -8,4 +8,5 @@ import (
 )
 
 const (
-	model
+	model      = "/CaffeNet.xml"
+	pluginPath = "/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/
