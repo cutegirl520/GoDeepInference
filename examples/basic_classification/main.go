@@ -18,3 +18,5 @@ func main() {
 
 	// Read in the image file name.
 	args := os.Args
+	if len(args) != 2 {
+		log.Fatal("Please provide an image as 
