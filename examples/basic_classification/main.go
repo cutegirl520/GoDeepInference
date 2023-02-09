@@ -19,4 +19,9 @@ func main() {
 	// Read in the image file name.
 	args := os.Args
 	if len(args) != 2 {
-		log.Fatal("Please provide an image as 
+		log.Fatal("Please provide an image as input")
+	}
+	imageFile := args[1]
+
+	// Create an inference configurator value.
+	pluginPath
