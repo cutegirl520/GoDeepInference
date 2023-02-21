@@ -28,4 +28,7 @@ func main() {
 	pluginPaths.Add(pluginPath)
 	configurator := dlinfer.NewInferenceEngineConfigurator(model, pluginPaths, plugin, labelsFile)
 
-	// L
+	// Load our image.
+	images := dlinfer.NewStringVector()
+	images.Add(imageFile)
+	configurator.LoadImage
