@@ -26,4 +26,6 @@ func main() {
 	// Create an inference configurator value.
 	pluginPaths := dlinfer.NewStringVector()
 	pluginPaths.Add(pluginPath)
-	configurator :=
+	configurator := dlinfer.NewInferenceEngineConfigurator(model, pluginPaths, plugin, labelsFile)
+
+	// L
