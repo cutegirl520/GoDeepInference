@@ -24,4 +24,6 @@ func main() {
 	imageFile := args[1]
 
 	// Create an inference configurator value.
-	pluginPath
+	pluginPaths := dlinfer.NewStringVector()
+	pluginPaths.Add(pluginPath)
+	configurator :=
