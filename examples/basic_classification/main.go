@@ -31,4 +31,9 @@ func main() {
 	// Load our image.
 	images := dlinfer.NewStringVector()
 	images.Add(imageFile)
-	configurator.LoadImage
+	configurator.LoadImages(images)
+
+	// Load the model.
+	configurator.LoadModel()
+
+	// Infer the content of the image
