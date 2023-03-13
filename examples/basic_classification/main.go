@@ -36,4 +36,8 @@ func main() {
 	// Load the model.
 	configurator.LoadModel()
 
-	// Infer the content of the image
+	// Infer the content of the image.
+	configurator.Infer()
+
+	// Get the top results for our image.
+	configurator.GetTopRes
