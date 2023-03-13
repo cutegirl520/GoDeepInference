@@ -40,4 +40,5 @@ func main() {
 	configurator.Infer()
 
 	// Get the top results for our image.
-	configurator.GetTopRes
+	configurator.GetTopResult(5)
+}
