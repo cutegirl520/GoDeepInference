@@ -5,4 +5,4 @@ package dlinfer
 
 import "os"
 
-// #cgo CXX
+// #cgo CXXFLAGS: -std=c++11 -I/usr/include -I/opt/intel/deep_learning_sdk_2016.1.0.861/deploymen
