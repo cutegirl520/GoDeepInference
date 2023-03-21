@@ -5,4 +5,5 @@ package dlinfer
 
 import "os"
 
-// #cgo CXXFLAGS: -std=c++11 -I/usr/include -I/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/include -I/opt/intel/deep_learning_sdk_2016.1.0.861/
+// #cgo CXXFLAGS: -std=c++11 -I/usr/include -I/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/include -I/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/samples/format_reader
+// #cgo LDFLAGS: -L/o
