@@ -9,4 +9,5 @@ import "os"
 // #cgo LDFLAGS: -L/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/bin/intel64/lib -L/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/lib/intel64 -ldl -linference_engine -lformat_reader
 import "C"
 
-// Configurator
+// Configurator inncludes the necessary pieces of an
+// Inferenence Engine Configurator, 
