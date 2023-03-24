@@ -10,4 +10,7 @@ import "os"
 import "C"
 
 // Configurator inncludes the necessary pieces of an
-// Inferenence Engine Configurator, 
+// Inferenence Engine Configurator, as used in the Intel
+// Deep Learning iSDK.
+type Configurator struct {
+	model
