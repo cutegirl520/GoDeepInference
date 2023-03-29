@@ -21,4 +21,6 @@ type Configurator struct {
 
 // NewConfigurator creates a new configurator for a particular
 // trained model.
-func NewConfigurator(modelFile, pl
+func NewConfigurator(modelFile, pluginPath, pluginName, labelFile string) (*Configurator, error) {
+
+	// Vali
