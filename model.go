@@ -19,4 +19,6 @@ type Configurator struct {
 	labelFile  string
 }
 
-// NewConfigurator creat
+// NewConfigurator creates a new configurator for a particular
+// trained model.
+func NewConfigurator(modelFile, pl
