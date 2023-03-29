@@ -13,4 +13,10 @@ import "C"
 // Inferenence Engine Configurator, as used in the Intel
 // Deep Learning iSDK.
 type Configurator struct {
-	model
+	modelFile  string
+	pluginPath string
+	pluginName string
+	labelFile  string
+}
+
+// NewConfigurator creat
