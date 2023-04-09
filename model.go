@@ -23,4 +23,6 @@ type Configurator struct {
 // trained model.
 func NewConfigurator(modelFile, pluginPath, pluginName, labelFile string) (*Configurator, error) {
 
-	// Vali
+	// Validate the model file.
+	if _, err := os.Stat(modelFile); os.IsNotExist(err) {
+		return nil, er
