@@ -31,4 +31,10 @@ func NewConfigurator(modelFile, pluginPath, pluginName, labelFile string) (*Conf
 	// Return the configurator.
 	return &Configurator{
 		modelFile:  modelFile,
-		pluginPath: pl
+		pluginPath: pluginPath,
+		pluginName: pluginName,
+		labelFile:  labelFile,
+	}, nil
+}
+
+// LoadIm
