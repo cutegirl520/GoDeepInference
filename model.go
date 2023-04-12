@@ -37,4 +37,7 @@ func NewConfigurator(modelFile, pluginPath, pluginName, labelFile string) (*Conf
 	}, nil
 }
 
-// LoadIm
+// LoadImage loads an image as input to an inference.
+func LoadImage() {
+
+}
