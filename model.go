@@ -25,4 +25,10 @@ func NewConfigurator(modelFile, pluginPath, pluginName, labelFile string) (*Conf
 
 	// Validate the model file.
 	if _, err := os.Stat(modelFile); os.IsNotExist(err) {
-		return nil, er
+		return nil, err
+	}
+
+	// Return the configurator.
+	return &Configurator{
+		modelFile:  modelFile,
+		pluginPath: pl
