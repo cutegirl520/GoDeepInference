@@ -6,4 +6,6 @@ _Note_: This is a work in progress.
 
 # Requirements
 
-- [Go 1.8+](https://golang.o
+- [Go 1.8+](https://golang.org/)
+- Ubuntu 14.04
+- [Intel's Deep Learning SDK Deployment Tools](https://software.intel
