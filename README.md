@@ -8,4 +8,9 @@ _Note_: This is a work in progress.
 
 - [Go 1.8+](https://golang.org/)
 - Ubuntu 14.04
-- [Intel's Deep Learning SDK Deployment Tools](https://software.intel
+- [Intel's Deep Learning SDK Deployment Tools](https://software.intel.com/en-us/deep-learning-sdk)
+- [swig 3.0.6+](http://www.swig.org/)
+
+# Usage
+
+- To get the G
