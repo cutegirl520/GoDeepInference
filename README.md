@@ -13,4 +13,10 @@ _Note_: This is a work in progress.
 
 # Usage
 
-- To get the G
+- To get the GoDeepInference package:
+
+    ```
+    go get github.com/cutegirl520/GoDeepInference
+    ```
+
+- D
