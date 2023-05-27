@@ -22,4 +22,4 @@ _Note_: This is a work in progress.
 - Declare the following environmental variable:
 
     ```
-    export LD_LIBRARY_PATH=$L
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/infer
