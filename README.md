@@ -19,4 +19,7 @@ _Note_: This is a work in progress.
     go get github.com/cutegirl520/GoDeepInference
     ```
 
-- D
+- Declare the following environmental variable:
+
+    ```
+    export LD_LIBRARY_PATH=$L
