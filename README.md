@@ -22,4 +22,7 @@ _Note_: This is a work in progress.
 - Declare the following environmental variable:
 
     ```
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/bin/intel64/lib:/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/lib/int
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/bin/intel64/lib:/opt/intel/deep_learning_sdk_2016.1.0.861/deployment_tools/inference_engine/lib/intel64
+    ```
+
+- You can build/install your Go progams as usual with `go build` and `go
